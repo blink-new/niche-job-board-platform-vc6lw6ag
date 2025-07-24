@@ -28,8 +28,8 @@ export function PostJobModal({ open, onOpenChange, onJobPosted }: PostJobModalPr
     description: '',
     requirements: '',
     benefits: '',
-    employmentType: '',
-    experienceLevel: '',
+    employmentType: undefined as string | undefined,
+    experienceLevel: undefined as string | undefined,
     applicationType: 'email' as 'email' | 'link',
     applicationEmail: '',
     applicationLink: ''
@@ -71,8 +71,8 @@ export function PostJobModal({ open, onOpenChange, onJobPosted }: PostJobModalPr
       description: '',
       requirements: '',
       benefits: '',
-      employmentType: '',
-      experienceLevel: '',
+      employmentType: undefined,
+      experienceLevel: undefined,
       applicationType: 'email',
       applicationEmail: '',
       applicationLink: ''
