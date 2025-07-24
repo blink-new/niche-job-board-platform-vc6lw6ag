@@ -46,11 +46,11 @@ export function JobBoard({ jobs, savedJobs, onJobClick, onSaveJob }: JobBoardPro
         job.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         job.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
 
-      const matchesLocation = !locationFilter || job.location === locationFilter
-      const matchesEmploymentType = !employmentTypeFilter || job.employmentType === employmentTypeFilter
-      const matchesExperienceLevel = !experienceLevelFilter || job.experienceLevel === experienceLevelFilter
+      const matchesLocation = !locationFilter || locationFilter === 'all-locations' || job.location === locationFilter
+      const matchesEmploymentType = !employmentTypeFilter || employmentTypeFilter === 'all-types' || job.employmentType === employmentTypeFilter
+      const matchesExperienceLevel = !experienceLevelFilter || experienceLevelFilter === 'all-levels' || job.experienceLevel === experienceLevelFilter
       
-      const matchesSalary = !salaryMinFilter || 
+      const matchesSalary = !salaryMinFilter || salaryMinFilter === 'any-salary' || 
         (job.salaryMin && job.salaryMin >= parseInt(salaryMinFilter))
 
       return matchesSearch && matchesLocation && matchesEmploymentType && 
@@ -114,7 +114,7 @@ export function JobBoard({ jobs, savedJobs, onJobClick, onSaveJob }: JobBoardPro
                 <SelectValue placeholder="Location" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Locations</SelectItem>
+                <SelectItem value="all-locations">All Locations</SelectItem>
                 {locations.map(location => (
                   <SelectItem key={location} value={location}>{location}</SelectItem>
                 ))}
@@ -127,7 +127,7 @@ export function JobBoard({ jobs, savedJobs, onJobClick, onSaveJob }: JobBoardPro
                 <SelectValue placeholder="Job Type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Types</SelectItem>
+                <SelectItem value="all-types">All Types</SelectItem>
                 {employmentTypes.map(type => (
                   <SelectItem key={type} value={type}>{type}</SelectItem>
                 ))}
@@ -140,7 +140,7 @@ export function JobBoard({ jobs, savedJobs, onJobClick, onSaveJob }: JobBoardPro
                 <SelectValue placeholder="Experience" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Levels</SelectItem>
+                <SelectItem value="all-levels">All Levels</SelectItem>
                 {experienceLevels.map(level => (
                   <SelectItem key={level} value={level}>{level}</SelectItem>
                 ))}
@@ -164,7 +164,7 @@ export function JobBoard({ jobs, savedJobs, onJobClick, onSaveJob }: JobBoardPro
                 <SelectValue placeholder="Minimum Salary" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Any Salary</SelectItem>
+                <SelectItem value="any-salary">Any Salary</SelectItem>
                 <SelectItem value="30000">$30,000+</SelectItem>
                 <SelectItem value="50000">$50,000+</SelectItem>
                 <SelectItem value="70000">$70,000+</SelectItem>
